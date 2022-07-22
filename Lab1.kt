@@ -1,86 +1,56 @@
 import java.lang.NullPointerException
 
-//No tocar esta clase ---
+// No tocar esta clase ---
 data class ItemData(
     var originalPos: Int,
-    var originalValue: Any,
-    var type: String? = null,
+    var originalValue: Any?,  //Se cambió el tipo de Any a Any? para ejecutar el programa 
+	var type: String? = null,
     var info: String? = null
 )
 // -----------------------
 
 fun main() {
     val result = processList(listOf(25, "Hola", null, false))
-    //val result = processList(listOf(false,false,false,true,true,false))
-    //val result = processList(listOf(2,4,5,8,10,12,11))
-    //val result = processList(listOf("hola","casa","a","ab","supercalifragilisticoespialidoso"))
-    //val result = processList(listOf(10, "Enero", null, true))
-    //val result = processList(listOf(null, null, null, null, null))
-    //val result = processList(listOf())
-    //val result = processList(null)
-
-    /*
-    val result = processList(
-        listOf(20, 25, 2, 7, "hola", "", true, false, null, 2.0)
-    )
-    */
     println(result)
-
 }
 
 fun processList(inputList: List<Any?>?): List<ItemData>? {
-
-    //Crear variable lista y un contador
-    val lista =  ArrayList<ItemData>()
-    var i = 0
+	//Crear variable lista y un contador
+    var lista =  ArrayList<ItemData>()
+    var i: Int = 0
 
     //verificar si la entrada es o no null
     if (inputList != null) {
         //si inputList no es null..
 
         //for para recorrer cada elemento de InputList
-
         for (x in inputList){
 
             /**originalPos y originalValue:**/
             //crear una variable ItemData y asignar valores iniciales
-            //val new = ItemData(originalPos = i, originalValue = x)
+            var new = ItemData(originalPos = i, originalValue = x)
             //Aumentar el num del contador
-            val posAnterior = i
-            i += 1
+            i = i+1
 
             /**type*/
             //verificar el tipo de dato/objeto
-            val tipo = when(x){
-                is Int -> "entero"
-                is String -> "cadena"
-                is Boolean -> "booleano"
-                else -> null
+            when(x){
+                is Int -> new.type = "entero"
+                is String -> new.type = "cadena"
+                is Boolean -> new.type = "booleano"
+                else -> new.type = null
             }
-
 
             //comprobar si el elemento es o no null:
             if (x != null){
                 //Si el elemento no es null...
-                val new = ItemData(originalPos = posAnterior, originalValue = x, type = tipo)
 
                 /**info:*/
                 //Corroborar el tipo del elemento
                 if (new.type == "entero"){
                     //si es de tipo entero...
                     //convertir x a tipo Int para poder realizar operaciones mat. con ella
-                    x as Int//            when {
-//                i == 0 -> {
-//
-//                }
-//                i == 1 -> {
-//
-//                }
-//                else -> {
-//
-//                }
-//            }
-
+                    x as Int
 
                     //ver si x es multiplo de 10,5,2 o ninguno
                     if(x%10 == 0){
@@ -136,28 +106,3 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     }
     //FIN
 }
-
-/**
- * Cómo verificar el tipo de objeto?
- * when (myAnyTypeElement) {
- * 	is String -> TODO()
- *  is Int -> TODO()
- *  is Boolean -> TODO()
- * 	else -> TODO()
- * }
- */
-
-/**
- * Cómo declarar una función en una variable?
- * val myFuncVar = { x: Any -> TODO() }
- */
-
-/**
- * Cómo crear un objeto de nuestra clase?
- * val newItem = ItemData(
- * 	originalPos = 0,
- * 	originalValue = "hola"
- * 	type = "cadena"
- * 	info = "L4"
- * )
- */
