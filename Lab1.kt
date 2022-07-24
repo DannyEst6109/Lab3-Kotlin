@@ -23,39 +23,17 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
                 val new = ItemData(originalPos = i, originalValue = x)
                 i += 1
                 when (x) {
-                    is Int -> {
-                        new.type = "entero"
-                        if (x % 10 == 0) {
-                            new.info = "m10"
-                        } else if (x % 5 == 0) {
-                            new.info = "m5"
-                        } else if (x % 2 == 0) {
-                            new.info = "m2"
-                        } else {
-                            new.info = null
-                        }
-                    }is String -> {
-                        new.type = "cadena"
+                    is Int -> { new.type = "entero"
+                        new.info = (if (x % 10 == 0) "m10" else if (x % 5 == 0)"m5" else if (x % 2 == 0) "m2" else null)
+                    }is String -> { new.type = "cadena"
                         new.info = "l${x.length}"
-                    }is Boolean -> {
-                        new.type = "booleano"
-                        if (x == true) {
-                            new.info = "verdadero"
-                        } else {
-                            new.info = "falso"
-                        }
-                    }else -> {
-                        new.type = null
-                        new.info = null
+                    }is Boolean -> { new.type = "booleano"
+                        new.info = (if (x == true) "verdadero" else "falso").toString()
                     }
                 }
                 lista.add(new)
-            }else{
-                i += 1
-            }
+            }else { i += 1 }
         }
         return lista
-    }else {
-        return null
-    }
+    }else { return null }
 }
